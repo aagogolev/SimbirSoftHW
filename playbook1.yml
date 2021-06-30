@@ -1,0 +1,23 @@
+---
+ - hosts: all  
+   become: yes
+
+   tasks:
+   - name: install git
+     apt: name=git state=latest
+
+   - name: install python3
+     apt: name=python3 state=latest
+
+   - name: install pip
+     apt: name=python3-pip state=latest
+
+   - name: update pip
+     shell: pip3 install --upgrade pip==21.1.3
+
+   - name: clone git
+     shell: git clone https://github.com/anfederico/Flaskex
+
+   - name: start app
+     shell: pip install -r ./Flaskex/requirements.txt && python3 ./Flaskex/app.py 
+
